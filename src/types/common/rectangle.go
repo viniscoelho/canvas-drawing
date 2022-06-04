@@ -1,5 +1,7 @@
 package common
 
+type Canvas [][]string
+
 type Rectangle struct {
 	Location Coordinates
 	Width    int
