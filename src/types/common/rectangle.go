@@ -9,6 +9,6 @@ type Rectangle struct {
 }
 
 type Coordinates struct {
-	Row    int
-	Column int
+	X int
+	Y int
 }
