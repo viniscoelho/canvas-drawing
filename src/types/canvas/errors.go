@@ -3,11 +3,17 @@ package userstore
 type RectangleOutOfBoundsError struct{}
 
 func (e RectangleOutOfBoundsError) Error() string {
-	return "Rectangle index out of bounds"
+	return "rectangle index out of bounds"
 }
 
 type DrawingOutOfBoundsError struct{}
 
 func (e DrawingOutOfBoundsError) Error() string {
-	return "Drawing index out of bounds"
+	return "drawing index out of bounds"
+}
+
+type EmptyDrawingParamsError struct{}
+
+func (e EmptyDrawingParamsError) Error() string {
+	return "fill and outline fields are empty"
 }
