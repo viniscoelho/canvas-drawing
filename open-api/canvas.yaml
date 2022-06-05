@@ -1,0 +1,95 @@
+swagger: "2.0"
+info:
+  version: "2.0.0"
+  title: "Canvas API"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /canvas:
+    get:
+      summary: "Fetches the canvas drawing."
+      description: >-
+        Returns an array of strings containg the current state a canvas drawing.
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: >-
+            A canvas drawing.
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Canvas"
+    post:
+      summary: "Draws a rectangle into the canvas."
+      description: >-
+        Draws a rectangle into the canvas given its upper-left position, the width and height. The drawing operation also accepts two parameters, outline and fill, consisting of the border design and its inner design. Neither outline and fill can be omitted simultaneously. 
+      parameters:
+        - name: "canvas"
+          in: "body"
+          description: "Instructions to draw the rectangle into the canvas."
+          required: true
+          schema:
+            $ref: "#/definitions/Rectangle"
+      responses:
+        "201":
+          description: >-
+            Rectangle drawing completed successfully.
+        "400":
+          description: >-
+            Invalid parameters provided. One of the required parameters was not provided and/or both outline and fill parameters are empty.
+        "500":
+          description: >-
+            Internal server error while processing the request.
+definitions:
+  Canvas:
+    type: "object"
+    properties:
+      canvas:
+        type: "array"
+        items:
+          type: "string"
+    example:
+      canvas: ['   @@@@@                ',
+		           '   @XXX@  XXXXXXXXXXXXXX',
+		           '   @@@@@  XOOOOOOOOOOOOX',
+          		 '          XOOOOOOOOOOOOX',
+          		 '          XOOOOOOOOOOOOX',
+          		 '          XOOOOOOOOOOOOX',
+          		 '          XXXXXXXXXXXXXX']
+  Rectangle:
+    type: "object"
+    required:
+      - "coordinates"
+      - "height"
+      - "width"
+    properties:
+      coordinates:
+        $ref: "#/definitions/Coordinates"
+      height:
+        type: "integer"
+      width:
+        type: "integer"
+      outline:
+        type: "string"
+        maxLength: 1
+      fill:
+        type: "string"
+        maxLength: 1
+    example:
+      coordinates: "{'x': 5, 'y': 3}"
+      height: 10
+      width: 4
+      outline: "X"
+      fill: "@"
+  Coordinates:
+    type: "object"
+    properties:
+      x: 
+        type: "integer"
+      y:
+        type: "integer"
