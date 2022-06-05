@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"encoding/json"
 	"errors"
 	"exercise/src/types/common"
 )
@@ -53,4 +54,11 @@ func validateRectangle(rect common.RectangleDTO) error {
 	}
 
 	return nil
+}
+
+func serializeCanvas(canvas common.CanvasString) ([]byte, error) {
+	dto := common.CanvasDTO{
+		Canvas: canvas,
+	}
+	return json.Marshal(dto)
 }
