@@ -43,7 +43,7 @@ func TestCanvasDrawing_Fill(t *testing.T) {
 	}
 	cd.FillCanvas(rectB)
 
-	expected := []string{
+	expectedCanvas := []string{
 		"",
 		"",
 		"   @@@@@",
@@ -56,9 +56,9 @@ func TestCanvasDrawing_Fill(t *testing.T) {
 	}
 
 	canvas := cd.GetCanvas()
-	for y := 0; y < len(expected); y++ {
+	for y := 0; y < len(expectedCanvas); y++ {
 		canvasRow := strings.TrimRight(canvas[y], " ")
-		assert.Equal(expected[y], canvasRow, "canvas does not match")
+		assert.Equal(expectedCanvas[y], canvasRow, "canvas does not match")
 	}
 }
 
@@ -106,7 +106,7 @@ func TestCanvasDrawing_OverlapingFill(t *testing.T) {
 	}
 	cd.FillCanvas(rectC)
 
-	expected := []string{
+	expectedCanvas := []string{
 		"              .......",
 		"              .......",
 		"              .......",
@@ -118,9 +118,9 @@ func TestCanvasDrawing_OverlapingFill(t *testing.T) {
 	}
 
 	canvas := cd.GetCanvas()
-	for y := 0; y < len(expected); y++ {
+	for y := 0; y < len(expectedCanvas); y++ {
 		canvasRow := strings.TrimRight(canvas[y], " ")
-		assert.Equal(expected[y], canvasRow, "canvas does not match")
+		assert.Equal(expectedCanvas[y], canvasRow, "canvas does not match")
 	}
 }
 
@@ -142,20 +142,16 @@ func TestCanvasDrawing_SinglePoint(t *testing.T) {
 	}
 	cd.FillCanvas(rectA)
 
-	expected := []string{
+	expectedCanvas := []string{
 		".",
-		"",
-		"",
-		"",
-		"",
 		"",
 		"",
 		"",
 	}
 
 	canvas := cd.GetCanvas()
-	for y := 0; y < len(expected); y++ {
+	for y := 0; y < len(expectedCanvas); y++ {
 		canvasRow := strings.TrimRight(canvas[y], " ")
-		assert.Equal(expected[y], canvasRow, "canvas does not match")
+		assert.Equal(expectedCanvas[y], canvasRow, "canvas does not match")
 	}
 }
