@@ -55,12 +55,12 @@ definitions:
           type: "string"
     example:
       canvas: ['   @@@@@                ',
-		           '   @XXX@  XXXXXXXXXXXXXX',
-		           '   @@@@@  XOOOOOOOOOOOOX',
-          		 '          XOOOOOOOOOOOOX',
-          		 '          XOOOOOOOOOOOOX',
-          		 '          XOOOOOOOOOOOOX',
-          		 '          XXXXXXXXXXXXXX']
+              '   @XXX@  XXXXXXXXXXXXXX',
+              '   @@@@@  XOOOOOOOOOOOOX',
+              '          XOOOOOOOOOOOOX',
+              '          XOOOOOOOOOOOOX',
+              '          XOOOOOOOOOOOOX',
+              '          XXXXXXXXXXXXXX']
   Rectangle:
     type: "object"
     required:
