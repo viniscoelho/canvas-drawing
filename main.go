@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -9,13 +11,16 @@ import (
 	"exercise/src/types/canvas"
 )
 
-const (
-	height = 100
-	width  = 100
+var (
+	height = flag.Int("height", 50, "height of the canvas")
+	width  = flag.Int("width", 50, "width of the canvas")
+	port   = flag.Int("port", 3000, "application address port")
 )
 
 func main() {
-	cd, err := canvas.NewCanvasDrawing(height, width)
+	flag.Parse()
+
+	cd, err := canvas.NewCanvasDrawing(*height, *width)
 	if err != nil {
 		log.Fatal("could not initialize storage")
 	}
@@ -24,7 +29,7 @@ func main() {
 		Handler:      router.CreateRoutes(cd),
 		ReadTimeout:  0,
 		WriteTimeout: 0,
-		Addr:         ":3000",
+		Addr:         fmt.Sprintf(":%d", *port),
 		IdleTimeout:  time.Second * 60,
 	}
 	log.Fatal(s.ListenAndServe())
