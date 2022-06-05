@@ -1,3 +1,4 @@
+//go:generate mockgen -destination=mocks/mocks.go -package=mocks exercise/src/types CanvasDrawing
 package types
 
 import (
