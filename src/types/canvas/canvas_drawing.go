@@ -11,6 +11,10 @@ type canvasDrawingImpl struct {
 }
 
 func NewCanvasDrawing(height, width int) (*canvasDrawingImpl, error) {
+	if height <= 0 || width <= 0 {
+		return nil, &InvalidCanvasError{}
+	}
+
 	cd := &canvasDrawingImpl{
 		canvas:    make(common.Canvas, height),
 		maxHeight: height,
@@ -36,7 +40,7 @@ func (cd *canvasDrawingImpl) initializeCanvas() error {
 }
 
 func (cd *canvasDrawingImpl) FillCanvas(rect common.Rectangle) error {
-	if err := cd.isValidRectangle(rect); err != nil {
+	if err := cd.validateRectangle(rect); err != nil {
 		return err
 	}
 
@@ -52,9 +56,9 @@ func (cd *canvasDrawingImpl) FillCanvas(rect common.Rectangle) error {
 	return nil
 }
 
-// isValidRectangle checks if a rectangle drawing is valid and
+// validateRectangle checks if a rectangle drawing is valid and
 // returns an error if not
-func (cd *canvasDrawingImpl) isValidRectangle(rect common.Rectangle) error {
+func (cd *canvasDrawingImpl) validateRectangle(rect common.Rectangle) error {
 	if rect.Location.X < 0 || rect.Location.Y < 0 ||
 		rect.Location.X > cd.maxWidth || rect.Location.Y > cd.maxHeight {
 		return &RectangleOutOfBoundsError{}
@@ -63,6 +67,10 @@ func (cd *canvasDrawingImpl) isValidRectangle(rect common.Rectangle) error {
 	if rect.Height <= 0 || rect.Location.Y+rect.Height > cd.maxHeight ||
 		rect.Width <= 0 || rect.Location.X+rect.Width > cd.maxWidth {
 		return &DrawingOutOfBoundsError{}
+	}
+
+	if rect.Outline == nil && rect.Fill == nil {
+		return &InvalidParamsError{}
 	}
 
 	return nil

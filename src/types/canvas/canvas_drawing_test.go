@@ -27,7 +27,8 @@ func TestCanvasDrawing_Fill(t *testing.T) {
 		Outline: &outline,
 		Fill:    &fill,
 	}
-	cd.FillCanvas(rectA)
+	err = cd.FillCanvas(rectA)
+	assert.NoError(err)
 
 	outline = 'X'
 	fill = 'O'
@@ -41,7 +42,8 @@ func TestCanvasDrawing_Fill(t *testing.T) {
 		Outline: &outline,
 		Fill:    &fill,
 	}
-	cd.FillCanvas(rectB)
+	err = cd.FillCanvas(rectB)
+	assert.NoError(err)
 
 	expectedCanvas := []string{
 		"",
@@ -57,6 +59,7 @@ func TestCanvasDrawing_Fill(t *testing.T) {
 
 	canvas := cd.GetCanvas()
 	for y := 0; y < len(expectedCanvas); y++ {
+		// remove canvas trailing spaces to facilitate comparison with test case
 		canvasRow := strings.TrimRight(canvas[y], " ")
 		assert.Equal(expectedCanvas[y], canvasRow, "canvas does not match")
 	}
@@ -78,7 +81,8 @@ func TestCanvasDrawing_OverlapingFill(t *testing.T) {
 		Width:  7,
 		Fill:   &fill,
 	}
-	cd.FillCanvas(rectA)
+	err = cd.FillCanvas(rectA)
+	assert.NoError(err)
 
 	outline := 'O'
 	rectB := common.Rectangle{
@@ -90,7 +94,8 @@ func TestCanvasDrawing_OverlapingFill(t *testing.T) {
 		Width:   8,
 		Outline: &outline,
 	}
-	cd.FillCanvas(rectB)
+	err = cd.FillCanvas(rectB)
+	assert.NoError(err)
 
 	outline = 'X'
 	fill = 'X'
@@ -104,7 +109,8 @@ func TestCanvasDrawing_OverlapingFill(t *testing.T) {
 		Outline: &outline,
 		Fill:    &fill,
 	}
-	cd.FillCanvas(rectC)
+	err = cd.FillCanvas(rectC)
+	assert.NoError(err)
 
 	expectedCanvas := []string{
 		"              .......",
@@ -119,6 +125,7 @@ func TestCanvasDrawing_OverlapingFill(t *testing.T) {
 
 	canvas := cd.GetCanvas()
 	for y := 0; y < len(expectedCanvas); y++ {
+		// remove canvas trailing spaces to facilitate comparison with test case
 		canvasRow := strings.TrimRight(canvas[y], " ")
 		assert.Equal(expectedCanvas[y], canvasRow, "canvas does not match")
 	}
@@ -140,7 +147,8 @@ func TestCanvasDrawing_SinglePoint(t *testing.T) {
 		Width:  1,
 		Fill:   &fill,
 	}
-	cd.FillCanvas(rectA)
+	err = cd.FillCanvas(rectA)
+	assert.NoError(err)
 
 	expectedCanvas := []string{
 		".",
@@ -151,7 +159,64 @@ func TestCanvasDrawing_SinglePoint(t *testing.T) {
 
 	canvas := cd.GetCanvas()
 	for y := 0; y < len(expectedCanvas); y++ {
+		// remove canvas trailing spaces to facilitate comparison with test case
 		canvasRow := strings.TrimRight(canvas[y], " ")
 		assert.Equal(expectedCanvas[y], canvasRow, "canvas does not match")
 	}
+}
+
+func TestCanvasDrawing_InvalidCanvas(t *testing.T) {
+	assert := assert.New(t)
+
+	_, err := NewCanvasDrawing(0, 0)
+	assert.Error(err)
+}
+
+func TestCanvasDrawing_InvalidRectangles(t *testing.T) {
+	assert := assert.New(t)
+
+	cd, err := NewCanvasDrawing(10, 10)
+	assert.NoError(err)
+
+	rectangles := generateInvalidRectangles()
+	for _, rect := range rectangles {
+		err := cd.FillCanvas(rect)
+		assert.Error(err)
+	}
+}
+
+func generateInvalidRectangles() []common.Rectangle {
+	rectangles := make([]common.Rectangle, 0)
+
+	// negative X-index
+	rect := common.NewDefaultRectangle()
+	rect.Location.X = -1
+	rectangles = append(rectangles, rect)
+
+	// negative Y-index
+	rect = common.NewDefaultRectangle()
+	rect.Location.Y = -1
+	rectangles = append(rectangles, rect)
+
+	// negative X and Y-indexes
+	rect = common.NewDefaultRectangle()
+	rect.Location.X, rect.Location.Y = -1, -1
+	rectangles = append(rectangles, rect)
+
+	// empty height
+	rect = common.NewDefaultRectangle()
+	rect.Height = 0
+	rectangles = append(rectangles, rect)
+
+	// empty width
+	rect = common.NewDefaultRectangle()
+	rect.Width = 0
+	rectangles = append(rectangles, rect)
+
+	// outline and fill nil
+	rect = common.NewDefaultRectangle()
+	rect.Outline, rect.Fill = nil, nil
+	rectangles = append(rectangles, rect)
+
+	return rectangles
 }
