@@ -22,7 +22,7 @@ func main() {
 
 	cd, err := canvas.NewCanvasDrawing(*height, *width)
 	if err != nil {
-		log.Fatal("could not initialize storage")
+		log.Fatal("could not initialize canvas")
 	}
 
 	s := &http.Server{
