@@ -19,6 +19,21 @@ type Coordinates struct {
 	Y int
 }
 
+func NewDefaultRectangle() Rectangle {
+	outline := '@'
+	fill := 'X'
+	return Rectangle{
+		Location: Coordinates{
+			X: 0,
+			Y: 0,
+		},
+		Width:   3,
+		Height:  3,
+		Outline: &outline,
+		Fill:    &fill,
+	}
+}
+
 func NewRectangleFromDTO(rectDTO RectangleDTO) (Rectangle, error) {
 	if err := validateRectangleDTO(rectDTO); err != nil {
 		return Rectangle{}, fmt.Errorf("could not create rectangle from dto: %w", err)
