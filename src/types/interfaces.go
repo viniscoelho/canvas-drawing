@@ -5,6 +5,6 @@ import (
 )
 
 type CanvasDrawing interface {
-	DrawCanvas(common.Rectangle) error
+	FillCanvas(common.Rectangle) error
 	GetCanvas() common.CanvasString
 }
