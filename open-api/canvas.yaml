@@ -81,7 +81,9 @@ definitions:
         type: "string"
         maxLength: 1
     example:
-      coordinates: "{'x': 5, 'y': 3}"
+      coordinates:
+        x: 5
+        y: 3
       height: 10
       width: 4
       outline: "X"
