@@ -13,11 +13,11 @@ func CreateRoutes(cd types.CanvasDrawing) *mux.Router {
 	r := mux.NewRouter()
 
 	r.Path("/canvas").
-		Methods(http.MethodGet).
+		Methods(http.MethodPost).
 		Name("DrawCanvas").
 		Handler(routes.NewDrawCanvasHandler(cd))
 	r.Path("/canvas").
-		Methods(http.MethodPost).
+		Methods(http.MethodGet).
 		Name("ReadCanvas").
 		Handler(routes.NewReadCanvasHandler(cd))
 
