@@ -123,3 +123,39 @@ func TestCanvasDrawing_OverlapingFill(t *testing.T) {
 		assert.Equal(expected[y], canvasRow, "canvas does not match")
 	}
 }
+
+func TestCanvasDrawing_SinglePoint(t *testing.T) {
+	assert := assert.New(t)
+
+	cd, err := NewCanvasDrawing(15, 30)
+	assert.NoError(err)
+
+	fill := '.'
+	rectA := common.Rectangle{
+		Location: common.Coordinates{
+			X: 0,
+			Y: 0,
+		},
+		Height: 1,
+		Width:  1,
+		Fill:   &fill,
+	}
+	cd.FillCanvas(rectA)
+
+	expected := []string{
+		".",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+	}
+
+	canvas := cd.GetCanvas()
+	for y := 0; y < len(expected); y++ {
+		canvasRow := strings.TrimRight(canvas[y], " ")
+		assert.Equal(expected[y], canvasRow, "canvas does not match")
+	}
+}

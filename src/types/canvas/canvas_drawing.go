@@ -60,8 +60,8 @@ func (cd *canvasDrawingImpl) isValidRectangle(rect common.Rectangle) error {
 		return &RectangleOutOfBoundsError{}
 	}
 
-	if rect.Height < 0 || rect.Location.Y+rect.Height > cd.maxHeight ||
-		rect.Width < 0 || rect.Location.X+rect.Width > cd.maxWidth {
+	if rect.Height <= 0 || rect.Location.Y+rect.Height > cd.maxHeight ||
+		rect.Width <= 0 || rect.Location.X+rect.Width > cd.maxWidth {
 		return &DrawingOutOfBoundsError{}
 	}
 
