@@ -16,7 +16,7 @@ import (
 	typesmocks "exercise/src/types/mocks"
 )
 
-func TestDrawCanvas(t *testing.T) {
+func TestDrawCanvas_Success(t *testing.T) {
 	assert := assert.New(t)
 
 	ctrl := gomock.NewController(t)
@@ -37,6 +37,33 @@ func TestDrawCanvas(t *testing.T) {
 
 	resp := rw.Result()
 	assert.Equal(http.StatusCreated, resp.StatusCode)
+}
+
+func TestDrawCanvas_InvalidRoutes(t *testing.T) {
+	assert := assert.New(t)
+
+	testCases := []struct {
+		path string
+	}{
+		{path: "/"},
+		{path: "/canvas/"},
+		{path: "/canvas/draw"},
+		{path: "/canvas/draw/something"},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.path, func(t *testing.T) {
+			body := bytes.NewReader([]byte{})
+			req := httptest.NewRequest(http.MethodPost, tc.path, body)
+			rw := httptest.NewRecorder()
+
+			router := newFakeRouter(nil)
+			router.ServeHTTP(rw, req)
+
+			resp := rw.Result()
+			assert.Equal(http.StatusNotFound, resp.StatusCode)
+		})
+	}
 }
 
 func drawOnCanvasAndReturnDTO(canvasMock *typesmocks.MockCanvasDrawing) common.RectangleDTO {

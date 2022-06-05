@@ -32,3 +32,29 @@ func TestReadCanvas(t *testing.T) {
 	resp := rw.Result()
 	assert.Equal(http.StatusOK, resp.StatusCode)
 }
+
+func TestReadCanvas_InvalidRoutes(t *testing.T) {
+	assert := assert.New(t)
+
+	testCases := []struct {
+		path string
+	}{
+		{path: "/"},
+		{path: "/canvas/"},
+		{path: "/canvas/draw"},
+		{path: "/canvas/draw/something"},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.path, func(t *testing.T) {
+			req := httptest.NewRequest(http.MethodGet, tc.path, nil)
+			rw := httptest.NewRecorder()
+
+			router := newFakeRouter(nil)
+			router.ServeHTTP(rw, req)
+
+			resp := rw.Result()
+			assert.Equal(http.StatusNotFound, resp.StatusCode)
+		})
+	}
+}
