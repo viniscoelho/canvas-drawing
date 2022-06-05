@@ -21,9 +21,7 @@ paths:
           description: >-
             A canvas drawing.
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Canvas"
+            $ref: "#/definitions/Canvas"
     post:
       summary: "Draws a rectangle into the canvas."
       description: >-
