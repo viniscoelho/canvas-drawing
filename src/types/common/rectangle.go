@@ -1,6 +1,7 @@
 package common
 
 type Canvas [][]rune
+type CanvasString []string
 
 type Rectangle struct {
 	Location Coordinates

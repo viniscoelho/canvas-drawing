@@ -108,6 +108,10 @@ func (cd *canvasDrawingImpl) fillWithOutline(rect common.Rectangle) {
 	cd.fillOutline(rect)
 }
 
-func (cd *canvasDrawingImpl) GetCanvas() common.Canvas {
-	return cd.canvas
+func (cd *canvasDrawingImpl) GetCanvas() common.CanvasString {
+	canvas := make([]string, cd.maxHeight)
+	for y := 0; y < cd.maxHeight; y++ {
+		canvas[y] = string(cd.canvas[y])
+	}
+	return canvas
 }

@@ -57,7 +57,7 @@ func TestCanvasDrawing_Fill(t *testing.T) {
 
 	canvas := cd.GetCanvas()
 	for y := 0; y < len(expected); y++ {
-		canvasRow := strings.TrimRight(string(canvas[y]), " ")
+		canvasRow := strings.TrimRight(canvas[y], " ")
 		assert.Equal(expected[y], canvasRow, "canvas does not match")
 	}
 }
@@ -119,7 +119,7 @@ func TestCanvasDrawing_OverlapingFill(t *testing.T) {
 
 	canvas := cd.GetCanvas()
 	for y := 0; y < len(expected); y++ {
-		canvasRow := strings.TrimRight(string(canvas[y]), " ")
+		canvasRow := strings.TrimRight(canvas[y], " ")
 		assert.Equal(expected[y], canvasRow, "canvas does not match")
 	}
 }
