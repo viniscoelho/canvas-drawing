@@ -1,10 +1,12 @@
 package routes
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
 	"exercise/src/types"
+	"exercise/src/types/common"
 )
 
 type readCanvas struct {
@@ -28,4 +30,11 @@ func (h *readCanvas) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 
 	rw.Header().Set("Content-Type", "application/json")
 	rw.Write(content)
+}
+
+func serializeCanvas(canvas common.CanvasString) ([]byte, error) {
+	dto := common.CanvasDTO{
+		Canvas: canvas,
+	}
+	return json.Marshal(dto)
 }

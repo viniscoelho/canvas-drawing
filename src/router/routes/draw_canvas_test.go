@@ -53,16 +53,7 @@ func drawOnCanvasAndReturnDTO(canvasMock *typesmocks.MockCanvasDrawing) common.R
 	canvasMock.EXPECT().
 		FillCanvas(rect)
 
-	fillString := "."
-	return common.RectangleDTO{
-		Location: &common.CoordinatesDTO{
-			X: &rect.Location.X,
-			Y: &rect.Location.Y,
-		},
-		Height: &rect.Height,
-		Width:  &rect.Width,
-		Fill:   &fillString,
-	}
+	return common.NewDTOFromRectangle(rect)
 }
 
 func newFakeRouter(cd types.CanvasDrawing) *mux.Router {

@@ -37,7 +37,7 @@ func (h *drawCanvas) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rect, err := newRectangleFromDTO(rectDTO)
+	rect, err := common.NewRectangleFromDTO(rectDTO)
 	if err != nil {
 		log.Printf("Error: %s", err)
 		rw.WriteHeader(http.StatusBadRequest)
