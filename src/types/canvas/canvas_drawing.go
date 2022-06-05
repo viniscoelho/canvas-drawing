@@ -40,9 +40,7 @@ func (cd *canvasDrawingImpl) FillCanvas(rect common.Rectangle) error {
 		return err
 	}
 
-	if rect.Outline == nil && rect.Fill == nil {
-		return &EmptyDrawingParamsError{}
-	} else if rect.Outline == nil {
+	if rect.Outline == nil {
 		cd.fill(rect)
 	} else if rect.Fill == nil {
 		cd.fillOutline(rect)
