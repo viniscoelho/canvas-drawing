@@ -1,4 +1,4 @@
-package userstore
+package canvas
 
 import (
 	"strings"
