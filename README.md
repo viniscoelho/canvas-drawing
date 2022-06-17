@@ -29,7 +29,7 @@ To do it, type `go build .` and use the following arguments to override the defa
 For example:
 ```
 go build .
-./exercise --height 30 --width 20 --port 4000
+./canvas-drawing --height 30 --width 20 --port 4000
 ```
 
 ### Drawing in the canvas
