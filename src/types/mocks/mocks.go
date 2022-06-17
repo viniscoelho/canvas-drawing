@@ -5,7 +5,7 @@
 package mocks
 
 import (
-	common "exercise/src/types/common"
+	common "canvas-drawing/src/types/common"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"

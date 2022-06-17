@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"exercise/src/router"
-	"exercise/src/types/canvas"
+	"canvas-drawing/src/router"
+	"canvas-drawing/src/types/canvas"
 )
 
 var (

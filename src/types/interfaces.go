@@ -2,7 +2,7 @@
 package types
 
 import (
-	"exercise/src/types/common"
+	"canvas-drawing/src/types/common"
 )
 
 type CanvasDrawing interface {

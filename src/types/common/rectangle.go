@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-// TODO: should Ouline and Fill be a string instead?
+// TODO: should Outline and Fill be a string instead?
 type Rectangle struct {
 	Location Coordinates
 	Width    int

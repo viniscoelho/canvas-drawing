@@ -8,8 +8,8 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 
-	"exercise/src/types/common"
-	typesmocks "exercise/src/types/mocks"
+	"canvas-drawing/src/types/common"
+	typesmocks "canvas-drawing/src/types/mocks"
 )
 
 func TestReadCanvas(t *testing.T) {

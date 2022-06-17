@@ -1,7 +1,7 @@
 package canvas
 
 import (
-	"exercise/src/types/common"
+	"canvas-drawing/src/types/common"
 )
 
 type canvasDrawingImpl struct {

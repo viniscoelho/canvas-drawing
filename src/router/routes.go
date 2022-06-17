@@ -5,8 +5,8 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"exercise/src/router/routes"
-	"exercise/src/types"
+	"canvas-drawing/src/router/routes"
+	"canvas-drawing/src/types"
 )
 
 func CreateRoutes(cd types.CanvasDrawing) *mux.Router {

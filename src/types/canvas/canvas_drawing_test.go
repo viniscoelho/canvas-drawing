@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"exercise/src/types/common"
+	"canvas-drawing/src/types/common"
 )
 
 func TestCanvasDrawing_Fill(t *testing.T) {

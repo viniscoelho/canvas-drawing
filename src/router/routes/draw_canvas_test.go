@@ -11,9 +11,9 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/stretchr/testify/assert"
 
-	"exercise/src/types"
-	"exercise/src/types/common"
-	typesmocks "exercise/src/types/mocks"
+	"canvas-drawing/src/types"
+	"canvas-drawing/src/types/common"
+	typesmocks "canvas-drawing/src/types/mocks"
 )
 
 func TestDrawCanvas_Success(t *testing.T) {

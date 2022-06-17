@@ -7,8 +7,8 @@ import (
 	"log"
 	"net/http"
 
-	"exercise/src/types"
-	"exercise/src/types/common"
+	"canvas-drawing/src/types"
+	"canvas-drawing/src/types/common"
 )
 
 type drawCanvas struct {
