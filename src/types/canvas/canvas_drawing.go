@@ -90,7 +90,7 @@ func (cd *canvasDrawingImpl) fill(rect common.Rectangle) {
 	}
 }
 
-// fillOutline draws only the ouline of a rectangle
+// fillOutline draws only the outline of a rectangle
 func (cd *canvasDrawingImpl) fillOutline(rect common.Rectangle) {
 	upperMostY := rect.Location.Y
 	lowerMostY := rect.Location.Y + rect.Height
